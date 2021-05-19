@@ -3,51 +3,60 @@ package com.snakeladder;
 import java.util.*;
 
 public class SnakeLadder {
-	int position;
+	
 
 	public static int diceRollNumber() {
-		 return new Random().nextInt(6)+1;
+		return new Random().nextInt(6) + 1;
 	}
 
 	public int cases() {
-		return new Random().nextInt(3);	
+		return new Random().nextInt(3);
 	}
 
-	public void play() {
-		position = 0;
-		int count = 0;
-		while (position != 100) {
-			int num = diceRollNumber();
-			count++;
-			int options = cases();
-			switch (options) {
-			case 0:
-				break;
-			case 1: {
-				if (position + num <= 100) {
-					position = position + num;		
-					break;
-				}
-			}
-			case 2: {
-				if (position - num>= 0) {
-					position = position - num;
-						
-				} else {
-					position = 0;
-				}
+	public int play(int position) {
+		int num = diceRollNumber();
+		//System.out.println(num);
+		int options = cases();
+		//System.out.println(options);
+		switch (options) {
+		case 0:
+			break;
+		case 1: {
+			if (position + num <= 100) {
+				position = position + num;
+				play(position);
 				break;
 			}
-			}
-			System.out.print( position+" " );
 		}
-		System.out.println();
-		System.out.println("The Player Won The Game In " + count + " Dice Rolls");
+		case 2: {
+			if (position - num >= 0) {
+				position = position - num;
+
+			} else 
+				position = 0;
+			break;
+		}
+		}
+		return position;
 	}
 
 	public static void main(String[] args) {
+		 int positionPlayer1 = 0;
+	     int positionPlayer2 = 0;
 		SnakeLadder dc = new SnakeLadder();
-		dc.play();
+		while (positionPlayer1 != 100 || positionPlayer2 != 100) {
+			if(positionPlayer1==100||positionPlayer2==100) break;
+			positionPlayer1=dc.play(positionPlayer1);
+			System.out.println(positionPlayer1);
+			positionPlayer2=dc.play(positionPlayer2);
+			System.out.println(positionPlayer2);
+		}
+		System.out.println(positionPlayer1+ " "+positionPlayer2);
+		if (positionPlayer1 == 100)
+			System.out.println("Player 1 won the game");
+
+		else if(positionPlayer2==100)
+			System.out.println("Player 2 won the game");
 	}
 
 }
