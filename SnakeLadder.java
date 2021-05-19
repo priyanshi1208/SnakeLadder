@@ -10,9 +10,7 @@ public class SnakeLadder {
 	}
 
 	public int cases() {
-		Random random = new Random();
-		int result = random.nextInt(3);
-		return result;	
+		return new Random().nextInt(3);	
 	}
 
 	public void play() {
