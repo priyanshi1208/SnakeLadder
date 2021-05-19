@@ -29,7 +29,7 @@ public class SnakeLadder
 				   break;
 			   case 1:
 			   {
-				   if(position+num<=100)
+				   if(position+num+1<=100)
 				   {
 					   position= position+num+1;
 					   break;
@@ -37,7 +37,7 @@ public class SnakeLadder
 			   }
 			   case 2:
 			   {
-				   if(position+num<=0)
+				   if(position-num-1<=0)
 				   {
 					   	position= position-num-1;
 					   	break;
